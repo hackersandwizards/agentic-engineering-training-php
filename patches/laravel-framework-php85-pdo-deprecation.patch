@@ -1,0 +1,36 @@
+--- a/config/database.php
++++ b/config/database.php
+@@ -1,6 +1,11 @@
+ <?php
+
+ use Illuminate\Support\Str;
++
++// PHP 8.5+ moved PDO::MYSQL_ATTR_SSL_CA to Pdo\Mysql::ATTR_SSL_CA
++$mysqlSslCaConstant = class_exists('Pdo\Mysql')
++    ? constant('Pdo\Mysql::ATTR_SSL_CA')
++    : (defined('PDO::MYSQL_ATTR_SSL_CA') ? constant('PDO::MYSQL_ATTR_SSL_CA') : null);
+
+ return [
+
+@@ -57,8 +62,8 @@
+             'prefix_indexes' => true,
+             'strict' => true,
+             'engine' => null,
+-            'options' => extension_loaded('pdo_mysql') ? array_filter([
+-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
++            'options' => extension_loaded('pdo_mysql') && $mysqlSslCaConstant ? array_filter([
++                $mysqlSslCaConstant => env('MYSQL_ATTR_SSL_CA'),
+             ]) : [],
+         ],
+
+@@ -77,8 +82,8 @@
+             'prefix_indexes' => true,
+             'strict' => true,
+             'engine' => null,
+-            'options' => extension_loaded('pdo_mysql') ? array_filter([
+-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
++            'options' => extension_loaded('pdo_mysql') && $mysqlSslCaConstant ? array_filter([
++                $mysqlSslCaConstant => env('MYSQL_ATTR_SSL_CA'),
+             ]) : [],
+         ],
+

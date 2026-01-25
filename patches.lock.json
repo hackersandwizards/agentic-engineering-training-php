@@ -1,0 +1,17 @@
+{
+    "_hash": "deb80a75416000fa883d4a4295989460ef24dfe939e0dc93470883064b8bf0de",
+    "patches": {
+        "laravel/framework": [
+            {
+                "package": "laravel/framework",
+                "description": "Fix PHP 8.5 PDO::MYSQL_ATTR_SSL_CA deprecation",
+                "url": "patches/laravel-framework-php85-pdo-deprecation.patch",
+                "sha256": "3af63a508a04779d5932332e37b54b17186ed2b8a0a3fee707484e03adce3d31",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ]
+    }
+}
